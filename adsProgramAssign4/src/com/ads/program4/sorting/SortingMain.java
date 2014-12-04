@@ -3,11 +3,11 @@ package com.ads.program4.sorting;
 import java.util.Scanner;
 
 public class SortingMain {
+	protected static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println(getWelcomeMessage());
 		Integer choice = 5;
 		while (choice != null) {
 			switch (choice) {
@@ -15,9 +15,20 @@ public class SortingMain {
 				SortingUtilityMethods.performInsertSort();
 				choice = 5;
 				break;
+			case 2:
+				SortingUtilityMethods.performShellSort();
+				choice = 5;
+				break;
 			case 5:
 				System.out.println(getWelcomeMessage());
 				choice = getUserInput();
+				if (choice == null) {
+					getUserInput();
+				}
+				break;
+			default:
+				System.out.println("Wrong option");
+				choice = 5;
 				break;
 			}
 		}
@@ -25,13 +36,10 @@ public class SortingMain {
 	}
 
 	private static Integer getUserInput() {
-		Scanner sc = new Scanner(System.in);
-		if (sc.hasNextInt()) {
-			int choice = sc.nextInt();
-			sc.close();
+		if (scan.hasNextInt()) {
+			int choice = scan.nextInt();
 			return choice;
 		} else {
-			sc.close();
 			return null;
 		}
 	}
