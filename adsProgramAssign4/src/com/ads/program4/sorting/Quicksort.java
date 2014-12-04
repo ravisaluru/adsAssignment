@@ -4,7 +4,6 @@
 package com.ads.program4.sorting;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,11 +38,19 @@ public class Quicksort extends AlgorithmBody {
 	protected void sortingAlgorithm() {
 		List<Integer> items = new ArrayList<Integer>();
 		items = getListFromDataInput();
+		startTimeInMilliSeconds = System.currentTimeMillis();
 		sort(items);
+		endTImeInMilliSeconds = System.currentTimeMillis();
+		printAlgorithmSummaryForCertainInput(this.inputSize, 0l);
 	}
 
 	private List<Integer> getListFromDataInput() {
-		return Arrays.asList(this.dataInput);
+		Integer[] data = this.dataInput;
+		List<Integer> list = new ArrayList<Integer>();
+		for (Integer integer : data) {
+			list.add(integer);
+		}
+		return list;
 	}
 
 	/**
