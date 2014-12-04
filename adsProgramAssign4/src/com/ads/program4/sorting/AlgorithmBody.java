@@ -15,8 +15,8 @@ public abstract class AlgorithmBody {
 	protected static final int INPUT_SIZE_TEN_THOUSAND = 10000;
 	protected static final int INPUT_SIZE_FIFTY_THOUSAND = 50000;
 	protected static final int INPUT_SIZE_HUNDRED_THOUSAND = 100000;
-	protected ArrayList<String> completeSummary = new ArrayList<String>();
-	protected static String completeSummaryOfAllSortingTechniques = new String();
+	protected static ArrayList<String> completeSummary;
+	protected static String completeSummaryOfAllSortingTechniques;
 	protected long startTimeInMilliSeconds = 0l;
 	protected long endTImeInMilliSeconds = 0l;
 
@@ -64,21 +64,24 @@ public abstract class AlgorithmBody {
 	@SuppressWarnings("rawtypes")
 	protected void appendToCompleteAlgorithmSummary(Class classObject) {
 		if (isCompleteSummaryNotEmpty()) {
-			Iterator<String> it = this.completeSummary.iterator();
+			Iterator<String> it = completeSummary.iterator();
 			StringBuffer sb = new StringBuffer();
+			sb.append("*********************************************************************************\n\n");
+			sb.append("\t The complete Algorithm =[" + classObject.getName()
+					+ "] summary for different types of input is as follows \n");
 			while (it.hasNext()) {
-				sb.append("****************************************************************************************\n\n");
-				sb.append("\t\t The complete Algorithm =[" + classObject.getName()
-						+ "] summary for different types of input is as follows \n\n");
+
 				sb.append(it.next());
-				sb.append("*********************************************************************************************\n\n");
+				sb.append("\n\n");
 			}
-			completeSummaryOfAllSortingTechniques = sb.toString();
+			sb.append("*********************************************************************************\n\n");
+			completeSummaryOfAllSortingTechniques = completeSummaryOfAllSortingTechniques
+					+ sb.toString();
 		}
 	}
 
 	protected boolean isCompleteSummaryNotEmpty() {
-		return this.completeSummary != null;
+		return completeSummary != null;
 	}
 
 	protected Integer[] getRandomData(int upperBound) {

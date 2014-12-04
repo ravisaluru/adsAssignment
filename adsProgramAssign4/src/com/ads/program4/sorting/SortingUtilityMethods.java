@@ -9,16 +9,19 @@ public class SortingUtilityMethods {
 
 		InsertionSort insertionSort = new InsertionSort();
 		processForVariousInputs(insertionSort, AlgorithmBody.INPUT_SIZE_ONE_THOUSAND);
+		insertionSort.appendToCompleteAlgorithmSummary(insertionSort.getClass());
 	}
 
 	protected static void performShellSort() {
 		Shellsort shellSort = new Shellsort();
 		processForVariousInputs(shellSort, AlgorithmBody.INPUT_SIZE_ONE_THOUSAND);
+		shellSort.appendToCompleteAlgorithmSummary(shellSort.getClass());
 	}
 
 	protected static void performQuickSort() {
 		Quicksort quickSort = new Quicksort();
 		processForVariousInputs(quickSort, AlgorithmBody.INPUT_SIZE_ONE_THOUSAND);
+		quickSort.appendToCompleteAlgorithmSummary(quickSort.getClass());
 	}
 
 	protected static void processForVariousInputs(Object classObject, int input) {

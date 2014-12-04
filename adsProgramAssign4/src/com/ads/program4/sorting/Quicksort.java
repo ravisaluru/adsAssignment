@@ -33,7 +33,7 @@ public class Quicksort extends AlgorithmBody {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.ads.program4.sorting.AlgorithmBody#sortingAlgorithm()
 	 */
 	@Override
@@ -54,17 +54,13 @@ public class Quicksort extends AlgorithmBody {
 				pivot = median3(items, left, right);
 
 				// Begin partitioning
-				int i = left + 1;
-				int j = right;
+				int i = left, j = right - 1;
 				for (;;) {
-					while (items[i].compareTo(pivot) < 0) {
-						i++;
+					while (items[++i].compareTo(pivot) < 0) {
 					}
-					while (items[j].compareTo(pivot) > 0) {
-						j--;
+					while (items[--j].compareTo(pivot) > 0) {
 					}
 					if (i < j) {
-						numberOfSwaps++;
 						swapReferences(items, i, j);
 					} else {
 						break;

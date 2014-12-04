@@ -1,5 +1,6 @@
 package com.ads.program4.sorting;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SortingMain {
@@ -7,6 +8,9 @@ public class SortingMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+		AlgorithmBody.completeSummaryOfAllSortingTechniques = new String();
+		AlgorithmBody.completeSummary = new ArrayList<String>();
 
 		Integer choice = 7;
 		while (choice != null) {
