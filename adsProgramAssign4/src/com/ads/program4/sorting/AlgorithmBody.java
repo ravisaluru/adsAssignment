@@ -16,6 +16,7 @@ public abstract class AlgorithmBody {
 	protected static final int INPUT_SIZE_FIFTY_THOUSAND = 50000;
 	protected static final int INPUT_SIZE_HUNDRED_THOUSAND = 100000;
 	protected ArrayList<String> completeSummary = new ArrayList<String>();
+	protected static String completeSummaryOfAllSortingTechniques = new String();
 	protected long startTimeInMilliSeconds = 0l;
 	protected long endTImeInMilliSeconds = 0l;
 
@@ -29,27 +30,23 @@ public abstract class AlgorithmBody {
 	/**
 	 * Prints the Sorting Algorithm Output <li>Running Time of the Algorithm
 	 */
-	protected void printAlgorithmSummaryForCertainInput(int inputSize,
-			long numberOfSwaps) {
+	protected void printAlgorithmSummaryForCertainInput(int inputSize, long numberOfSwaps) {
 		long totalTime = endTImeInMilliSeconds - startTimeInMilliSeconds;
 		String output = new String();
 		StringBuffer sb = new StringBuffer();
 		if (totalTime > 60000) {
 			totalTime = totalTime / 60000;
-			sb.append("The time taken to sort the data input ("
-					+ format.format(inputSize) + ") is =["
-					+ format.format(totalTime) + "] in minutes");
+			sb.append("The time taken to sort the data input (" + format.format(inputSize)
+					+ ") is =[" + format.format(totalTime) + "] in minutes");
 			sb.append("The Number of Swaps used are =[" + numberOfSwaps + "]");
 		} else if (totalTime > 1000) {
 			totalTime = totalTime / 1000;
-			sb.append("The time taken to sort the data input ("
-					+ format.format(inputSize) + ") is =["
-					+ format.format(totalTime) + "] in Seconds");
+			sb.append("The time taken to sort the data input (" + format.format(inputSize)
+					+ ") is =[" + format.format(totalTime) + "] in Seconds");
 			sb.append("The Number of Swaps used are =[" + numberOfSwaps + "]");
 		} else {
-			sb.append("The time taken to sort the data input ("
-					+ format.format(inputSize) + ") is =["
-					+ format.format(totalTime) + "] in Milli Seconds");
+			sb.append("The time taken to sort the data input (" + format.format(inputSize)
+					+ ") is =[" + format.format(totalTime) + "] in Milli Seconds");
 			sb.append("The Number of Swaps used are =[" + numberOfSwaps + "]");
 		}
 		output = sb.toString();
@@ -65,19 +62,18 @@ public abstract class AlgorithmBody {
 	 *            The Algorithm Class
 	 */
 	@SuppressWarnings("rawtypes")
-	protected void printCompleteAlgorithmSummary(Class classObject) {
+	protected void appendToCompleteAlgorithmSummary(Class classObject) {
 		if (isCompleteSummaryNotEmpty()) {
 			Iterator<String> it = this.completeSummary.iterator();
 			StringBuffer sb = new StringBuffer();
 			while (it.hasNext()) {
 				sb.append("****************************************************************************************\n\n");
-				sb.append("\t\t The complete Algorithm =["
-						+ classObject.getName()
+				sb.append("\t\t The complete Algorithm =[" + classObject.getName()
 						+ "] summary for different types of input is as follows \n\n");
 				sb.append(it.next());
 				sb.append("*********************************************************************************************\n\n");
 			}
-			System.out.println(sb.toString());
+			completeSummaryOfAllSortingTechniques = sb.toString();
 		}
 	}
 
@@ -96,9 +92,8 @@ public abstract class AlgorithmBody {
 			}
 			return data;
 		} catch (ArrayIndexOutOfBoundsException ex) {
-			System.out
-			.println("Oops, something went wrong, the error message =["
-					+ ex.getMessage() + "]");
+			System.out.println("Oops, something went wrong, the error message =[" + ex.getMessage()
+					+ "]");
 			return null;
 		}
 	}

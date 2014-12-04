@@ -8,18 +8,33 @@ public class SortingMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Integer choice = 5;
+		Integer choice = 7;
 		while (choice != null) {
 			switch (choice) {
 			case 1:
 				SortingUtilityMethods.performInsertSort();
-				choice = 5;
+				choice = 7;
 				break;
 			case 2:
 				SortingUtilityMethods.performShellSort();
-				choice = 5;
+				choice = 7;
+				break;
+			case 3:
+				SortingUtilityMethods.performQuickSort();
+				choice = 7;
 				break;
 			case 5:
+				System.out
+				.println("**************************************The summary so far********************************");
+				System.out.println(AlgorithmBody.completeSummaryOfAllSortingTechniques);
+				System.out
+				.println("**************************************************************************************");
+				choice = 7;
+				break;
+			case 6:
+				System.out.println("Thank you!");
+				System.exit(-1);
+			case 7:
 				System.out.println(getWelcomeMessage());
 				choice = getUserInput();
 				if (choice == null) {
@@ -27,8 +42,8 @@ public class SortingMain {
 				}
 				break;
 			default:
-				System.out.println("Wrong option");
-				choice = 5;
+				System.out.println("Sorry wrong option, please try again!");
+				choice = 7;
 				break;
 			}
 		}
@@ -56,7 +71,11 @@ public class SortingMain {
 		sb.append(getNewLine());
 		sb.append("4. Quicksort");
 		sb.append(getNewLine());
-		sb.append("Please enter 1 for Insertion sort, or 2 for Shellsort, or 3 for Heapsort, or 4 for Quicksort");
+		sb.append("5. Print Summary of All Techniques");
+		sb.append(getNewLine());
+		sb.append("6. Exit");
+		sb.append(getNewLine());
+		sb.append("Please enter 1 for Insertion sort, or 2 for Shellsort, or 3 for Heapsort, or 4 for Quicksort, or 5 for Summary, or 6 to Exit");
 		return sb.toString();
 	}
 

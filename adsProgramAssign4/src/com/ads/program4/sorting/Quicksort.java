@@ -3,8 +3,7 @@
  */
 package com.ads.program4.sorting;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * @author Ravi
@@ -12,6 +11,9 @@ import java.util.List;
  */
 public class Quicksort extends AlgorithmBody {
 	private int inputSize;
+	private static Integer pivot;
+	private static int CUTOFF = 10;
+	private static long numberOfSwaps = 0l;
 
 	public int getInputSize() {
 		return inputSize;
@@ -31,56 +33,94 @@ public class Quicksort extends AlgorithmBody {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.ads.program4.sorting.AlgorithmBody#sortingAlgorithm()
 	 */
 	@Override
 	protected void sortingAlgorithm() {
-		List<Integer> items = new ArrayList<Integer>();
-		items = getListFromDataInput();
 		startTimeInMilliSeconds = System.currentTimeMillis();
-		sort(items);
+		Integer[] items = this.dataInput;
+		quicksort(items, 0, items.length - 1);
 		endTImeInMilliSeconds = System.currentTimeMillis();
-		printAlgorithmSummaryForCertainInput(this.inputSize, 0l);
-	}
-
-	private List<Integer> getListFromDataInput() {
-		Integer[] data = this.dataInput;
-		List<Integer> list = new ArrayList<Integer>();
-		for (Integer integer : data) {
-			list.add(integer);
-		}
-		return list;
+		printAlgorithmSummaryForCertainInput(this.inputSize, numberOfSwaps);
 	}
 
 	/**
 	 * @param items
 	 */
-	private void sort(List<Integer> items) {
-		if (items.size() > 1) {
-			List<Integer> smaller = new ArrayList<>();
-			List<Integer> same = new ArrayList<>();
-			List<Integer> larger = new ArrayList<>();
+	private void quicksort(Integer[] items, int left, int right) {
+		{
+			if (left + CUTOFF <= right) {
+				pivot = median3(items, left, right);
 
-			Integer chosenItem = items.get(items.size() / 2);
-			for (Integer i : items) {
-				if (i < chosenItem) {
-					smaller.add(i);
-				} else if (i > chosenItem) {
-					larger.add(i);
-				} else {
-					same.add(i);
+				// Begin partitioning
+				int i = left + 1;
+				int j = right;
+				for (;;) {
+					while (items[i].compareTo(pivot) < 0) {
+						i++;
+					}
+					while (items[j].compareTo(pivot) > 0) {
+						j--;
+					}
+					if (i < j) {
+						numberOfSwaps++;
+						swapReferences(items, i, j);
+					} else {
+						break;
+					}
 				}
+
+				numberOfSwaps++;
+				swapReferences(items, i, right - 1); // Restore pivot
+
+				quicksort(items, left, i - 1); // Sort small elements
+				quicksort(items, i + 1, right); // Sort large elements
+			} else {
+				insertionSort(items, left, right);
 			}
+		}
+	}
 
-			sort(smaller); // Recursive call!
-			sort(larger); // Recursive call!
+	private static void swapReferences(Integer[] items, int i, int j) {
 
-			items.clear();
-			items.addAll(smaller);
-			items.addAll(same);
-			items.addAll(larger);
+		int temp = items[i];
+		items[i] = items[j];
+		items[j] = temp;
+	}
+
+	private static void insertionSort(Integer[] items, int left, int right) {
+
+		Integer[] arrayToSort = Arrays.copyOfRange(items, left, right);
+		int j;
+		for (int p = 1; p < arrayToSort.length; p++) {
+			Integer tmp = arrayToSort[p];
+			for (j = p; j > 0 && tmp.compareTo(arrayToSort[j - 1]) < 0; j--) {
+				numberOfSwaps++;
+				arrayToSort[j] = arrayToSort[j - 1];
+			}
+			arrayToSort[j] = tmp;
+		}
+	}
+
+	private static Integer median3(Integer[] items, int left, int right) {
+		int center = (left + right) / 2;
+		if (items[center].compareTo(items[left]) < 0) {
+			numberOfSwaps++;
+			swapReferences(items, left, center);
+		}
+		if (items[right].compareTo(items[left]) < 0) {
+			numberOfSwaps++;
+			swapReferences(items, left, right);
+		}
+		if (items[right].compareTo(items[center]) < 0) {
+			numberOfSwaps++;
+			swapReferences(items, center, right);
 		}
 
+		// Place pivot at position right - 1
+		numberOfSwaps++;
+		swapReferences(items, center, right - 1);
+		return items[right - 1];
 	}
 }
