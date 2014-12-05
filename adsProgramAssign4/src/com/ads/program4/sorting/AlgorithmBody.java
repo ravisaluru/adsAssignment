@@ -2,8 +2,10 @@ package com.ads.program4.sorting;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
 
 public abstract class AlgorithmBody {
 
@@ -67,8 +69,8 @@ public abstract class AlgorithmBody {
 			Iterator<String> it = completeSummary.iterator();
 			StringBuffer sb = new StringBuffer();
 			sb.append("*********************************************************************************\n\n");
-			sb.append("\t The complete Algorithm =[" + classObject.getName()
-					+ "] summary for different types of input is as follows \n");
+			sb.append("\t The complete Algorithm (" + classObject.getSimpleName()
+					+ "), summary for different types of input is as follows \n");
 			while (it.hasNext()) {
 
 				sb.append(it.next());
@@ -88,10 +90,16 @@ public abstract class AlgorithmBody {
 		try {
 			Random random = new Random();
 			Integer[] data = new Integer[upperBound];
-			int counter = upperBound - 1;
-			while (counter > -1) {
-				data[counter] = random.nextInt(upperBound + 1);
-				counter--;
+
+			Set<Integer> uniqueDataSet = new HashSet<Integer>();
+			while (uniqueDataSet.size() != upperBound) {
+				uniqueDataSet.add(random.nextInt(upperBound + 1));
+			}
+			Iterator<Integer> it = uniqueDataSet.iterator();
+			int counter = 0;
+			while (it.hasNext()) {
+				data[counter] = it.next();
+				counter++;
 			}
 			return data;
 		} catch (ArrayIndexOutOfBoundsException ex) {

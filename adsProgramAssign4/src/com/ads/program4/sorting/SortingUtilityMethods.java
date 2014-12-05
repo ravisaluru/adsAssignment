@@ -24,6 +24,12 @@ public class SortingUtilityMethods {
 		quickSort.appendToCompleteAlgorithmSummary(quickSort.getClass());
 	}
 
+	protected static void performHeapSort() {
+		Heapsort heapSort = new Heapsort();
+		processForVariousInputs(heapSort, AlgorithmBody.INPUT_SIZE_ONE_THOUSAND);
+		heapSort.appendToCompleteAlgorithmSummary(heapSort.getClass());
+	}
+
 	protected static void processForVariousInputs(Object classObject, int input) {
 		int operation = input;
 

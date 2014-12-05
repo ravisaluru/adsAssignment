@@ -24,15 +24,17 @@ public class SortingMain {
 				choice = 7;
 				break;
 			case 3:
-				SortingUtilityMethods.performQuickSort();
+				SortingUtilityMethods.performHeapSort();
 				choice = 7;
 				break;
+			case 4:
+				SortingUtilityMethods.performQuickSort();
 			case 5:
 				System.out
-				.println("**************************************The summary so far********************************");
+						.println("**************************************The summary so far********************************");
 				System.out.println(AlgorithmBody.completeSummaryOfAllSortingTechniques);
 				System.out
-				.println("**************************************************************************************");
+						.println("**************************************************************************************");
 				choice = 7;
 				break;
 			case 6:
